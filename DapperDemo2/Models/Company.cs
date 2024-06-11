@@ -7,6 +7,11 @@ namespace DapperDemo2.Models
 {
     public class Company
     {
+        public Company()
+        {
+            Employees = new List<Employee>();
+        }
+
         public int CompanyId { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
