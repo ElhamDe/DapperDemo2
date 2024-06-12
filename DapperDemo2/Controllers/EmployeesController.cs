@@ -61,11 +61,11 @@ namespace DapperDemo2.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ActionName("Create")]
-        public async Task<IActionResult> CreatePOST([Bind("CompanyId,Name,Address,City,State,PostalCode")] Company company)
+        public async Task<IActionResult> CreatePOST()
         {
             if (ModelState.IsValid)
             {
-                _empRepo.Add(Employee);
+                await _empRepo.AddAsync(Employee);
                 return RedirectToAction(nameof(Index));
             }
             return View(Employee);
