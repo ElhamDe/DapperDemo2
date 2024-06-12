@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using DapperDemo2.Data;
 using DapperDemo2.Models;
 using DapperDemo2.Repository;
+using Kendo.Mvc.UI;
 
 namespace DapperDemo2.Controllers
 {
@@ -38,7 +39,7 @@ namespace DapperDemo2.Controllers
 
             //return View(employees);
 
-            List<Employee> employees = _bonRepo.GetEmployeesWithCompany(companyId);
+            IEnumerable<Employee> employees = _bonRepo.GetEmployeesWithCompany(companyId);
             return View(employees);
         }
 

@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<DapperDemo2.Models.Employee>
+@using Kendo.Mvc.UI;
 
 <h1>Employees Management</h1>
 
@@ -28,29 +29,58 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Phone)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Company.Name)
-            </td>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Phone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Company.Name)
+                </td>
 
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.EmployeeId" class="btn btn-info">Edit</a>
-                <a asp-action="Delete" asp-route-id="@item.EmployeeId" class="btn btn-danger">Delete</a>
-            </td>
-        </tr>
-}
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.EmployeeId" class="btn btn-info">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@item.EmployeeId" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+
+@(Html.Kendo().Grid<DapperDemo2.Models.Employee>(Model)
+            .Name("grid")
+            .Columns(columns =>
+            {
+                columns.Select().Width(75);
+                columns.Bound(c => c.Name).Width(100).Title("emri"); ;
+                columns.Bound(c => c.Phone).Width(200).Title("tele"); ;
+                columns.Bound(c => c.Email).Width(300).Title("ema"); ;
+                columns.Bound(c => c.Company.Name).Width(100).Title("emri"); ;
+
+                columns.Command(c => c.Edit()).Width(100);
+                columns.Command(c => c.Destroy()).Width(100);
+            })
+            .Filterable()
+            .Groupable(g => g.ShowFooter(false))
+            .Pageable(p => p.Refresh(true))
+        //.DataSource(dataSource => dataSource
+        //        .Ajax()
+        //        .PageSize(10)
+        //        .Model(model => model.Id(p => p.EmployeeId))
+        //        .Read(read => read.Action("Grid_Read", "Home"))
+        //        .Create(update => update.Action("Grid_Create", "Home"))
+        //        .Update(update => update.Action("Grid_Update", "Home"))
+        //        .Destroy(update => update.Action("Grid_Destroy", "Home"))
+        //)
+        )

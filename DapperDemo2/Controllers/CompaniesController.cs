@@ -29,8 +29,8 @@ namespace DapperDemo2.Controllers
         // GET: Companies
         public async Task<IActionResult> Index()
         {
-            //return View(_compRepo.GetAll());
-            return View(_dapperRepo.List<Company>("usp_GetALLCompany"));
+            return View(_compRepo.GetAll());
+            //return View(_dapperRepo.List<Company>("usp_GetALLCompany"));
         }
 
         // GET: Companies/Details/5
@@ -78,8 +78,8 @@ namespace DapperDemo2.Controllers
             {
                 return NotFound();
             }
-            var company = _dapperRepo.Single<Company>("usp_GetCompany", new { CompanyId = id.GetValueOrDefault() });
-            //var company = _compRepo.Find(id.GetValueOrDefault());
+            //var company = _dapperRepo.Single<Company>("usp_GetCompany", new { CompanyId = id.GetValueOrDefault() });
+            var company = _compRepo.Find(id.GetValueOrDefault());
             if (company == null)
             {
                 return NotFound();

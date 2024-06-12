@@ -14,10 +14,17 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
+    <PackageReference Include="Telerik.UI.for.AspNet.Core" Version="2023.1.117" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Views\Employees\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Kendo.Mvc">
+      <HintPath>C:\Users\elhami\.nuget\packages\telerik.ui.for.aspnet.core\2023.1.117\lib\net7.0\Kendo.Mvc.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>
