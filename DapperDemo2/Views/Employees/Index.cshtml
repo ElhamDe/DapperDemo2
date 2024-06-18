@@ -57,30 +57,31 @@
     </tbody>
 </table>
 
-
 @(Html.Kendo().Grid<DapperDemo2.Models.Employee>(Model)
-            .Name("grid")
-            .Columns(columns =>
-            {
-                columns.Select().Width(75);
-                columns.Bound(c => c.Name).Width(100).Title("emri"); ;
-                columns.Bound(c => c.Phone).Width(200).Title("tele"); ;
-                columns.Bound(c => c.Email).Width(300).Title("ema"); ;
-                columns.Bound(c => c.Company.Name).Width(100).Title("emri"); ;
+             .Name("grid")
+             .Columns(columns =>
+             {
+                 columns.Select().Width(75);
+                 columns.Bound(c => c.Name).Width(100).Title("Name"); ;
+                 columns.Bound(c => c.Phone).Width(200).Title("Puntoret"); ;
+                 columns.Bound(c => c.Email).Width(100).Title("Qyteti"); ;
+                 columns.Bound(c => c.Company.Name).Width(100).Title("Compania"); ;
 
-                columns.Command(c => c.Edit()).Width(100);
-                columns.Command(c => c.Destroy()).Width(100);
-            })
-            .Filterable()
-            .Groupable(g => g.ShowFooter(false))
-            .Pageable(p => p.Refresh(true))
-        //.DataSource(dataSource => dataSource
-        //        .Ajax()
-        //        .PageSize(10)
-        //        .Model(model => model.Id(p => p.EmployeeId))
-        //        .Read(read => read.Action("Grid_Read", "Home"))
-        //        .Create(update => update.Action("Grid_Create", "Home"))
-        //        .Update(update => update.Action("Grid_Update", "Home"))
-        //        .Destroy(update => update.Action("Grid_Destroy", "Home"))
-        //)
-        )
+                 columns.Command(c => c.Edit()).Width(100);
+                 columns.Command(c => c.Destroy()).Width(100);
+             })
+             .ToolBar(toolbar =>
+             {
+                 toolbar.Create();
+                 toolbar.Excel();
+                 toolbar.Pdf();
+             })
+             .Pdf(pdf => pdf.ProxyURL(Url.Action("Excel_Export_Save", "Grid")))
+             .Excel(excel => excel.ProxyURL(Url.Action("Excel_Export_Save", "Grid")))
+             .Editable(editable => editable.Mode(GridEditMode.PopUp))
+             .Pageable()
+             .Sortable()
+             .Groupable(g => g.ShowFooter(false))
+             .Filterable()
+    )
+
